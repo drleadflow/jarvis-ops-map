@@ -115,15 +115,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <div class="header-inner">
     <h1>J.A.R.V.I.S.</h1>
     <p class="tagline">AI Employee Runtime — Autonomous Operations System</p>
-    <p class="subtitle">Built 2026-04-04 by Team Jarvis (Alpha, Bravo, Charlie, Delta, Echo) — 51 files, 9 packages, 5,027 lines</p>
+    <p class="subtitle">Built 2026-04-04 — 10 packages, 63+ files, webhook mode, 28+ agents used</p>
   </div>
 </header>
 
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stats-inner">
-    <div class="stat"><span class="stat-dot"></span><span class="stat-value">9</span><span class="stat-label">Packages</span></div>
-    <div class="stat"><span class="stat-dot"></span><span class="stat-value">51</span><span class="stat-label">Source Files</span></div>
+    <div class="stat"><span class="stat-dot"></span><span class="stat-value">10</span><span class="stat-label">Packages</span></div>
+    <div class="stat"><span class="stat-dot"></span><span class="stat-value">63+</span><span class="stat-label">Source Files</span></div>
     <div class="stat"><span class="stat-dot"></span><span class="stat-value">5,027</span><span class="stat-label">Lines of Code</span></div>
     <div class="stat"><span class="stat-dot"></span><span class="stat-value">8</span><span class="stat-label">DB Tables</span></div>
     <div class="stat"><span class="stat-dot"></span><span class="stat-value">5</span><span class="stat-label">Build Agents</span></div>
@@ -329,7 +329,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <div class="card card-coral">
     <span class="badge badge-coral">SPECIALIST TEAMS</span>
     <h3>On-Demand Research Agents</h3>
-    <p>Spawned as needed for specific tasks, then shut down. Examples from this session:</p>
+    <p>28+ agents spawned across the full build. Specialists for research, building, security, debugging, and deployment:</p>
     <ul>
       <li><strong>dashboard-researcher</strong> — Agent observability tools comparison</li>
       <li><strong>repo-scanner</strong> — GitHub repos for agent dashboards (10 repos audited)</li>
@@ -340,6 +340,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <li><strong>security-audit</strong> — Full OWASP security review (2 CRITICAL, 6 HIGH found + fixed)</li>
       <li><strong>team-channels</strong> — Telegram Channels plugin setup</li>
       <li><strong>team-agentsdk</strong> — Agent SDK integration build</li>
+      <li><strong>webhook-researcher</strong> — Grammy webhook patterns + Railway setup</li>
+      <li><strong>409-debugger</strong> — Telegram 409 conflict diagnosis and resolution</li>
+      <li><strong>railway-deployer</strong> — Railway deployment, env config, health checks</li>
+      <li><strong>dockerfile-builder</strong> — Multi-stage Docker build optimization</li>
+      <li><strong>state-debugger</strong> — Supabase schema debugging and migration fixes</li>
+      <li><strong>config-auditor</strong> — CLAUDE.md, tsconfig, package.json consistency</li>
+      <li><strong>lint-fixer</strong> — Biome lint/format auto-fix across all packages</li>
+      <li><strong>type-checker</strong> — TypeScript strict mode error resolution</li>
+      <li><strong>dep-resolver</strong> — pnpm workspace dependency resolution</li>
+      <li><strong>test-writer</strong> — Vitest test generation for core + state + workers</li>
+      <li><strong>env-validator</strong> — Environment variable validation and .env.example sync</li>
+      <li><strong>ops-map-builder</strong> — This operations map (HTML/CSS/JS)</li>
+      <li><strong>dashboard-builder</strong> — Next.js command center dashboard</li>
+      <li><strong>email-architect</strong> — IMAP/SMTP email system design</li>
+      <li><strong>memory-architect</strong> — Self-learning engine pattern extraction</li>
+      <li><strong>policy-builder</strong> — Risk lane classification + budget enforcement</li>
+      <li><strong>verification-builder</strong> — Secret scanner + test/lint/typecheck pipeline</li>
+      <li><strong>supervisor-builder</strong> — Alpha brain execution loop</li>
+      <li><strong>worker-builder</strong> — BaseWorker + Builder/Researcher/Tester workers</li>
     </ul>
   </div>
 
@@ -423,8 +442,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <div class="card card-blue">
     <span class="badge badge-blue">PRIMARY CHANNEL</span>
     <h3>Telegram — @jarvis_dlf_agent_bot</h3>
-    <p>Always-on communication. Christian messages, Jarvis responds with full Claude Agent SDK capabilities (tools, MCP, file system, agents).</p>
+    <p>Always-on communication. Webhook mode — no more 409 conflicts. Christian messages, Jarvis responds with full Claude Agent SDK capabilities.</p>
     <ul>
+      <li>Webhook mode — no more 409 conflicts</li>
       <li>Natural conversation (no /commands required)</li>
       <li>Typing indicator while thinking</li>
       <li>Smart model routing: Haiku for casual, Sonnet for tasks</li>
@@ -565,13 +585,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <div class="card card-blue">
     <span class="badge badge-blue">COMPUTE</span>
     <h3>Railway — jarvis-bot</h3>
-    <p>Always-on Node.js 22 container. Telegram bot polling + health check on port 8080. Auto-restarts on crash.</p>
+    <p>Always-on Node.js 22 container. Webhook mode (no polling) + health check on port 8080. Auto-restarts on crash.</p>
     <ul>
       <li>Service: jarvis-bot (Telegram + Agent SDK)</li>
+      <li>Webhook mode (no polling) — no more 409 conflicts</li>
       <li>Dockerfile: Node 22 Alpine + pnpm</li>
       <li>Environment: 11 variables configured</li>
     </ul>
-    <span class="url">https://railway.com/project/7c9ba946-490b-4c2b-a3f1-ef41b7e3e6e1</span>
+    <span class="url">https://jarvis-bot-production-fbba.up.railway.app</span>
   </div>
 
   <div class="flow-arrow"><span>&#8595;</span></div>
@@ -702,6 +723,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <li><a href="https://railway.com/project/7c9ba946-490b-4c2b-a3f1-ef41b7e3e6e1" target="_blank">Railway Dashboard</a></li>
       <li><a href="https://supabase.com/dashboard/project/vqvengibcpqiktpxlvbg" target="_blank">Supabase Dashboard</a></li>
       <li><a href="https://t.me/jarvis_dlf_agent_bot" target="_blank">Telegram: @jarvis_dlf_agent_bot</a></li>
+      <li><a href="https://dashboard-roan-three-55.vercel.app" target="_blank">Command Center Dashboard</a></li>
     </ul>
   </div>
 
@@ -752,8 +774,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     <ul>
       <li>Command Center Dashboard (Next.js + Supabase Realtime)</li>
       <li>Email account activation</li>
-      <li>Execution bridge (chat to supervisor)</li>
+      <li><s>Execution bridge (chat to supervisor)</s> Done</li>
       <li>Conversation persistence (Supabase)</li>
+      <li><s>Agent SDK Integration</s> Done</li>
+      <li>Multi-tenant user system</li>
+      <li>Dr. Emeka bot (@bleudaddybot)</li>
+      <li>Always-on monitoring agents</li>
+      <li>Vitest test suite</li>
     </ul>
   </div>
 
