@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jarvis — AI Employee Runtime Operations Map</title>
+<title>Jarvis Command Center — Operations Map</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -22,30 +22,44 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
-.header{background:linear-gradient(135deg,#0d1f3f 0%,#0a1628 40%,#121a2e 100%);padding:48px 0 40px;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
-.header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(59,130,246,.08) 0%,transparent 50%),radial-gradient(circle at 70% 30%,rgba(168,85,247,.06) 0%,transparent 40%);pointer-events:none}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#0d3b4f 0%,#0a2540 40%,#121a2e 100%);padding:48px 0 40px;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(20,184,166,.08) 0%,transparent 50%),radial-gradient(circle at 70% 30%,rgba(59,130,246,.06) 0%,transparent 40%);pointer-events:none}
 .header-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 24px}
-.header h1{font-size:2.4rem;font-weight:700;letter-spacing:-.5px;margin-bottom:6px;color:#fff}
-.header .tagline{font-size:1.05rem;color:var(--blue);font-weight:500;margin-bottom:4px}
+.header h1{font-size:2.2rem;font-weight:700;letter-spacing:-.5px;margin-bottom:6px;color:#fff}
+.header .tagline{font-size:1.05rem;color:var(--teal);font-weight:500;margin-bottom:4px}
 .header .subtitle{font-size:.92rem;color:var(--text-muted);margin-top:8px}
+
+/* STATS BAR */
 .stats-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 0;overflow-x:auto}
 .stats-inner{display:flex;justify-content:center;gap:32px;max-width:1100px;margin:0 auto;padding:0 24px;flex-wrap:wrap}
 .stat{display:flex;align-items:center;gap:8px;white-space:nowrap}
-.stat-value{font-size:1rem;font-weight:700;color:var(--blue)}
+.stat-value{font-size:1rem;font-weight:700;color:var(--teal)}
 .stat-label{font-size:.82rem;color:var(--text-muted)}
-.stat-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.stat-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
+
+/* LAYOUT */
 .main-wrap{max-width:1320px;margin:0 auto;padding:32px 24px 48px;display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start}
 @media(max-width:1024px){.main-wrap{grid-template-columns:1fr}.sidebar{order:-1}}
+
+/* TABS */
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:12px}
 .tab-btn{background:transparent;border:1px solid transparent;color:var(--text-muted);padding:8px 16px;border-radius:var(--radius-sm);cursor:pointer;font-size:.84rem;font-weight:500;transition:all .2s}
 .tab-btn:hover{color:var(--text);background:var(--surface2)}
-.tab-btn.active{background:var(--blue-bg);color:var(--blue);border-color:var(--blue-border)}
+.tab-btn.active{background:var(--teal-bg);color:var(--teal);border-color:var(--teal-border)}
+
+/* SEARCH */
 .search-wrap{margin-bottom:20px}
 .search-wrap input{width:100%;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:.9rem;outline:none;transition:border-color .2s}
-.search-wrap input:focus{border-color:var(--blue)}
+.search-wrap input:focus{border-color:var(--teal)}
 .search-wrap input::placeholder{color:var(--text-dim)}
+
+/* TAB CONTENT */
 .tab-panel{display:none}
 .tab-panel.active{display:block}
+
+/* CARDS */
 .card{border-radius:var(--radius);padding:20px;margin-bottom:16px;position:relative;border:1px solid transparent;transition:transform .15s,box-shadow .15s}
 .card:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.3)}
 .card-blue{background:var(--blue-bg);border-color:var(--blue-border)}
@@ -57,6 +71,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .card-gold{background:var(--gold-bg);border-color:var(--gold-border)}
 .card-teal{background:var(--teal-bg);border-color:var(--teal-border)}
 .card-coral{background:var(--coral-bg);border-color:var(--coral-border)}
+
 .card .badge{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border-radius:20px;margin-bottom:10px}
 .badge-blue{background:var(--blue);color:#fff}
 .badge-green{background:var(--green);color:#fff}
@@ -67,41 +82,63 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .badge-gold{background:var(--gold);color:#000}
 .badge-teal{background:var(--teal);color:#fff}
 .badge-coral{background:var(--coral);color:#fff}
+
 .card h3{font-size:1.05rem;font-weight:600;margin-bottom:6px}
 .card p,.card li{font-size:.88rem;color:var(--text-muted);line-height:1.55}
 .card ul{padding-left:18px;margin-top:6px}
 .card li{margin-bottom:3px}
-.card .url{font-size:.78rem;color:var(--blue);font-family:'SF Mono',Menlo,monospace;margin-top:6px;display:block;word-break:break-all}
+.card .url{font-size:.78rem;color:var(--teal);font-family:'SF Mono',Menlo,monospace;margin-top:6px;display:block;word-break:break-all}
+
+/* FLOW ARROW */
 .flow-arrow{text-align:center;padding:8px 0;color:var(--text-dim);font-size:1.4rem;line-height:1}
 .flow-arrow::after{content:'';display:block;width:2px;height:18px;background:var(--border);margin:0 auto}
 .flow-arrow span{display:block;margin-bottom:-4px}
+
+/* DECISION DIAMOND */
 .diamond{text-align:center;margin:8px 0 16px;position:relative}
-.diamond-box{display:inline-block;background:var(--surface2);border:2px solid var(--orange);padding:16px 28px;border-radius:var(--radius);position:relative}
+.diamond-box{display:inline-block;background:var(--surface2);border:2px solid var(--orange);padding:16px 28px;transform:rotate(0deg);border-radius:var(--radius);position:relative}
+.diamond-box::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:16px;height:16px;background:var(--surface2);border-top:2px solid var(--orange);border-left:2px solid var(--orange);transform:translateX(-50%) rotate(45deg)}
 .diamond-label{font-size:.9rem;font-weight:600;color:var(--orange)}
 .diamond-paths{display:flex;justify-content:center;gap:16px;margin-top:12px;flex-wrap:wrap}
 .diamond-path{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 16px;font-size:.82rem;color:var(--text-muted);text-align:center;min-width:140px}
 .diamond-path strong{display:block;color:var(--text);font-size:.85rem;margin-bottom:2px}
+
+/* SIDEBAR */
 .sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:24px}
 .sidebar .card{margin-bottom:0}
 .sidebar .card h3{font-size:.95rem;margin-bottom:10px}
 .sidebar .card ul{list-style:none;padding:0}
 .sidebar .card li{font-size:.82rem;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .sidebar .card li:last-child{border-bottom:none}
-.sidebar .card a{color:var(--blue);text-decoration:none}
+.sidebar .card a{color:var(--teal);text-decoration:none}
 .sidebar .card a:hover{text-decoration:underline}
-.agent-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-@media(max-width:768px){.agent-grid{grid-template-columns:1fr}}
-.layer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-@media(max-width:768px){.layer-grid{grid-template-columns:1fr}}
+
+/* COMPARISON TABLE */
+.compare-row{display:grid;grid-template-columns:160px 1fr 1fr;gap:0;font-size:.84rem;border-bottom:1px solid var(--border);padding:8px 0}
+.compare-row:last-child{border-bottom:none}
+.compare-label{color:var(--text);font-weight:600;padding-right:12px}
+.compare-emeka{color:var(--text-muted)}
+.compare-jarvis{color:var(--teal)}
+@media(max-width:768px){.compare-row{grid-template-columns:1fr;gap:4px}.compare-label{margin-bottom:2px}}
+
+/* PACKAGE GRID */
+.pkg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:768px){.pkg-grid{grid-template-columns:1fr}}
+
+/* LEGEND */
 .legend{margin-top:40px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
 .legend h3{font-size:.95rem;font-weight:600;margin-bottom:14px;color:var(--text-muted)}
 .legend-items{display:flex;flex-wrap:wrap;gap:16px}
 .legend-item{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--text-muted)}
 .legend-swatch{width:14px;height:14px;border-radius:3px}
+
+/* FOOTER */
 .footer{text-align:center;padding:32px 24px;color:var(--text-dim);font-size:.8rem;border-top:1px solid var(--border);margin-top:48px}
+
+/* PRINT */
 @media print{
   body{background:#fff;color:#000}
-  .header{background:#0a1628 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .header{background:#0a2540 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .tabs,.search-wrap,.sidebar{display:none}
   .tab-panel{display:block !important;page-break-inside:avoid}
   .card{break-inside:avoid;border:1px solid #ccc !important}
@@ -113,21 +150,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <h1>J.A.R.V.I.S.</h1>
-    <p class="tagline">AI Employee Runtime — Autonomous Operations System</p>
-    <p class="subtitle">Built 2026-04-04 — 10 packages, 63+ files, webhook mode, 28+ agents used</p>
+    <h1>Jarvis Command Center</h1>
+    <p class="tagline">AI Employee Runtime &mdash; Autonomous Operations System</p>
+    <p class="subtitle">Built 2026-04-05 &mdash; 3 Railway services, 11 agents, Supabase Auth, real-time observability</p>
   </div>
 </header>
 
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stats-inner">
-    <div class="stat"><span class="stat-dot"></span><span class="stat-value">10</span><span class="stat-label">Packages</span></div>
-    <div class="stat"><span class="stat-dot"></span><span class="stat-value">84</span><span class="stat-label">Source Files</span></div>
-    <div class="stat"><span class="stat-dot"></span><span class="stat-value">7,563</span><span class="stat-label">Lines of Code</span></div>
-    <div class="stat"><span class="stat-dot"></span><span class="stat-value">8</span><span class="stat-label">DB Tables</span></div>
-    <div class="stat"><span class="stat-dot"></span><span class="stat-value">5</span><span class="stat-label">Build Agents</span></div>
-    <div class="stat"><span class="stat-dot"></span><span class="stat-value">3</span><span class="stat-label">Autonomy Lanes</span></div>
+    <div class="stat"><span class="stat-dot"></span><span class="stat-value">3</span><span class="stat-label">Railway Services</span></div>
+    <div class="stat"><span class="stat-dot"></span><span class="stat-value">14</span><span class="stat-label">Packages</span></div>
+    <div class="stat"><span class="stat-dot"></span><span class="stat-value">11</span><span class="stat-label">AI Agents</span></div>
+    <div class="stat"><span class="stat-dot"></span><span class="stat-value">49</span><span class="stat-label">Dashboard Pages</span></div>
+    <div class="stat"><span class="stat-dot"></span><span class="stat-value">5</span><span class="stat-label">NATO Managers</span></div>
+    <div class="stat"><span class="stat-dot"></span><span class="stat-value">4</span><span class="stat-label">Observability Endpoints</span></div>
+    <div class="stat"><span class="stat-dot"></span><span class="stat-value">3</span><span class="stat-label">Auth Roles</span></div>
     <div class="stat"><span class="stat-dot"></span><span class="stat-value">7</span><span class="stat-label">Architecture Layers</span></div>
   </div>
 </div>
@@ -139,558 +177,602 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <!-- TABS -->
 <div class="tabs" role="tablist">
   <button class="tab-btn active" data-tab="overview" role="tab">System Overview</button>
+  <button class="tab-btn" data-tab="comparison" role="tab">Emeka vs Jarvis</button>
   <button class="tab-btn" data-tab="architecture" role="tab">Architecture</button>
   <button class="tab-btn" data-tab="agents" role="tab">Agent Teams</button>
   <button class="tab-btn" data-tab="packages" role="tab">Packages</button>
-  <button class="tab-btn" data-tab="comms" role="tab">Communication</button>
+  <button class="tab-btn" data-tab="communication" role="tab">Communication</button>
   <button class="tab-btn" data-tab="policy" role="tab">Policy Engine</button>
-  <button class="tab-btn" data-tab="infra" role="tab">Infrastructure</button>
-  <button class="tab-btn" data-tab="learning" role="tab">Self-Learning</button>
+  <button class="tab-btn" data-tab="observability" role="tab">Observability</button>
 </div>
 
 <!-- SEARCH -->
 <div class="search-wrap">
-  <input type="text" id="searchInput" placeholder="Search agents, packages, infrastructure, policies...">
+  <input type="text" id="searchInput" placeholder="Search agents, packages, architecture, policies...">
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- TAB: SYSTEM OVERVIEW -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<div class="tab-panel active" id="tab-overview">
+<!-- TAB 1: SYSTEM OVERVIEW -->
+<div class="tab-panel active" id="tab-overview" data-searchable>
 
   <div class="card card-blue">
-    <span class="badge badge-blue">WHAT IS JARVIS</span>
-    <h3>AI Employee Runtime</h3>
-    <p>Not a chatbot. Not one giant agent. A foreman with workers, memory, checkpoints, tests, and approval gates. Jarvis receives tasks via Telegram or Claude Code, decomposes them, delegates to specialized workers, verifies results, learns from outcomes, and reports back.</p>
-    <p style="margin-top:8px;color:var(--blue);font-weight:600">Never loses the thread.</p>
+    <span class="badge badge-blue">What Is This</span>
+    <h3>What Is Jarvis Command Center</h3>
+    <p>The complete Jarvis product: a Next.js 49-page operations dashboard (forked from Blade Command Center) connected to an always-on AI agent runtime. Agents execute tasks autonomously with heartbeats, budgets, and approval gates. Not a chatbot &mdash; a foreman with workers, memory, and verification.</p>
   </div>
 
-  <div class="flow-arrow"><span>&#8595;</span></div>
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-teal">
-    <span class="badge badge-teal">EXECUTION MODEL</span>
-    <h3>The Supervisor Loop</h3>
-    <p>Every cycle: observe state, plan next step, act with tools, verify result, record state, decide to continue or escalate.</p>
+    <span class="badge badge-teal">Infrastructure</span>
+    <h3>Three Railway Services</h3>
+    <p>The system runs on 3 Railway services:</p>
     <ul>
-      <li>Load checkpoint from last known good state</li>
-      <li>Pick next task from queue (respecting dependencies)</li>
-      <li>Check policy (risk lane + budget)</li>
-      <li>Dispatch to appropriate worker</li>
-      <li>Verify result (tests, lint, type check, secret scan)</li>
-      <li>Save checkpoint and loop</li>
+      <li><strong>command-center</strong> (Next.js) &mdash; 49-page dashboard at command-center-production-34b8.up.railway.app. Handles UI, auth, API proxying. Built with nixpacks.</li>
+      <li><strong>jarvis-runtime</strong> (Node.js supervisor) &mdash; Always-on agent runtime at jarvis-runtime-production.up.railway.app. Runs the fleet manager, heartbeat scheduler, budget enforcer, approval gate. Serves Paperclip-compatible API.</li>
+      <li><strong>jarvis-bot</strong> (Telegram) &mdash; Telegram bot interface at jarvis-bot-production-fbba.up.railway.app. Webhook mode with grammy.</li>
     </ul>
   </div>
 
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="diamond">
-    <div class="diamond-box"><span class="diamond-label">What autonomy lane?</span></div>
-    <div class="diamond-paths">
-      <div class="diamond-path"><strong>SAFE (Auto)</strong>Code, docs, research, tests, staging deploys</div>
-      <div class="diamond-path"><strong>ASK-ONCE</strong>Architecture, prod config, migrations, external content</div>
-      <div class="diamond-path"><strong>HUMAN-ONLY</strong>Prod deletions, billing, secrets, live social, CRM bulk ops</div>
-    </div>
-  </div>
-
-  <div class="flow-arrow"><span>&#8595;</span></div>
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-green">
-    <span class="badge badge-green">CAPABILITIES</span>
-    <h3>What Jarvis Can Do</h3>
+    <span class="badge badge-green">Data Layer</span>
+    <h3>Data Layer</h3>
+    <p>All data sources powering the Jarvis Command Center:</p>
     <ul>
-      <li>Build full applications (frontend, backend, database, deployment)</li>
-      <li>Research across web, YouTube, Reddit, X, academic papers</li>
-      <li>Audit and QA existing systems</li>
-      <li>Deploy to Railway, Vercel, Cloudflare</li>
-      <li>Manage CRM operations via GHL (508 tools)</li>
-      <li>Send and receive email autonomously</li>
-      <li>Create and manage agent teams for complex projects</li>
-      <li>Self-learn and improve from past work</li>
+      <li><strong>Supabase</strong> (Postgres + pgvector) &mdash; agents table, profiles table, tasks, checkpoints, memory, budgets, runs, artifacts</li>
+      <li><strong>Airtable</strong> &mdash; content items, outreach campaigns, lead data</li>
+      <li><strong>Meta API</strong> &mdash; ad campaigns, page insights, Instagram analytics</li>
+      <li><strong>GitHub API</strong> &mdash; repos, issues, commits</li>
+      <li><strong>MySQL</strong> &mdash; legacy leads database</li>
     </ul>
   </div>
 
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- TAB: ARCHITECTURE -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="tab-architecture">
+<!-- TAB 2: EMEKA VS JARVIS (COMPARISON) -->
+<div class="tab-panel" id="tab-comparison" data-searchable>
+
+  <div class="card card-blue">
+    <span class="badge badge-blue">Original</span>
+    <h3>Blade Command Center (Emeka's Original)</h3>
+    <p>The system Jarvis was forked from &mdash; built by Emeka for his agency (Dr. Blade / DLF):</p>
+    <ul>
+      <li><strong>Dashboard:</strong> Next.js app deployed on Vercel with 49 pages covering content, ads, analytics, leads, outreach, media, video, meetings, calendar, tasks, invoices, wiki, competitors, and more</li>
+      <li><strong>Agent Runtime:</strong> Connected to Paperclip agent runtime (separate service) &mdash; autonomous business ops agents with heartbeat, budget tracking, wake/sleep cycles</li>
+      <li><strong>Auth:</strong> NextAuth with Google OAuth + hardcoded password ("Skool!@90")</li>
+      <li><strong>Data Sources:</strong> Airtable, Meta API, Supabase, MySQL, GitHub, Slack, Mux, ElevenLabs, Cartesia</li>
+      <li><strong>Deployment:</strong> Vercel (dashboard) + separate Paperclip service</li>
+      <li><strong>Observability:</strong> None visible in the dashboard</li>
+      <li><strong>Monorepo:</strong> Single Next.js app (no workspace structure)</li>
+    </ul>
+  </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-purple">
-    <span class="badge badge-purple">LAYER 7</span>
-    <h3>Self-Learning Engine</h3>
-    <p>Pattern extraction, memory storage, confidence scoring, promotion tiers. Every task teaches Jarvis something.</p>
+    <span class="badge badge-purple">Our System</span>
+    <h3>Jarvis Command Center (Our System)</h3>
+    <p>The same 49-page dashboard, forked and significantly enhanced:</p>
+    <ul>
+      <li><strong>Dashboard:</strong> Same 49-page dashboard, forked and enhanced with new observability page</li>
+      <li><strong>Deployment:</strong> Railway (not Vercel) &mdash; 3 services in one Railway project</li>
+      <li><strong>Agent Runtime:</strong> Paperclip replaced with Jarvis Agent Runtime &mdash; our own always-on supervisor</li>
+      <li><strong>Agents:</strong> 11 agents (5 NATO managers: Alpha/Bravo/Charlie/Delta/Echo + 6 workers)</li>
+      <li><strong>Auth:</strong> Supabase Auth with email/password + Google OAuth + role-based access (admin/manager/viewer)</li>
+      <li><strong>New: System Observability</strong> page with real-time metrics, budgets, fleet health</li>
+      <li><strong>New: Heartbeat loop</strong> (30s) with auto-pause after 3 idle beats</li>
+      <li><strong>New: Budget enforcement</strong> per agent with daily caps</li>
+      <li><strong>New: Approval gate</strong> for risky actions (Lane 2/3 operations)</li>
+      <li><strong>New: v2.2 engine</strong> &mdash; confidence scoring, acquisition protocol, security gate, telemetry baseline</li>
+      <li><strong>Data:</strong> Same as Blade + Supabase agents table + profiles table with RBAC</li>
+      <li><strong>Monorepo:</strong> 14-package TypeScript monorepo (pnpm workspaces)</li>
+    </ul>
   </div>
-  <div class="flow-arrow"><span>&#8595;</span></div>
 
-  <div class="card card-red">
-    <span class="badge badge-red">LAYER 6</span>
-    <h3>Verification Engine</h3>
-    <p>Tests (Vitest), lint (Biome), typecheck (tsc), secret scanner (11 patterns), schema checker (Supabase diff).</p>
-  </div>
-  <div class="flow-arrow"><span>&#8595;</span></div>
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
-  <div class="card card-orange">
-    <span class="badge badge-orange">LAYER 5</span>
-    <h3>Policy Engine</h3>
-    <p>3 risk lanes (safe/ask-once/human-only), budget tracking (steps, tokens, retries, runtime), structured retry strategy.</p>
+  <div class="diamond">
+    <div class="diamond-box">
+      <span class="diamond-label">What Changed?</span>
+    </div>
+    <div class="diamond-paths">
+      <div class="diamond-path" style="border-color:var(--green-border)"><strong>KEPT</strong>All 49 dashboard pages, Airtable integration, Meta API, content/ads/analytics, UI design system</div>
+      <div class="diamond-path" style="border-color:var(--purple-border)"><strong>REPLACED / ADDED</strong>Auth (NextAuth&rarr;Supabase), Runtime (Paperclip&rarr;Jarvis), Hosting (Vercel&rarr;Railway), Observability, RBAC, Heartbeat</div>
+    </div>
   </div>
-  <div class="flow-arrow"><span>&#8595;</span></div>
 
-  <div class="card card-blue">
-    <span class="badge badge-blue">LAYER 4</span>
-    <h3>State Engine (Supabase)</h3>
-    <p>8 Postgres tables: projects, tasks, checkpoints, artifacts, approvals, runs, memory, budgets. pgvector for semantic search. RLS enabled.</p>
-  </div>
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="card card-teal">
-    <span class="badge badge-teal">LAYER 3</span>
-    <h3>Worker Pool</h3>
-    <p>Builder (code gen), Researcher (multi-platform), Tester (Vitest + E2E), Deployer, Debugger. Each with Claude API integration.</p>
-  </div>
-  <div class="flow-arrow"><span>&#8595;</span></div>
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-gold">
-    <span class="badge badge-gold">LAYER 2</span>
-    <h3>Supervisor (Alpha Brain)</h3>
-    <p>Main execution loop: decompose goals, schedule tasks, dispatch workers, verify results, manage checkpoints, escalate when needed.</p>
-  </div>
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="card card-green">
-    <span class="badge badge-green">LAYER 1</span>
-    <h3>Communication Layer</h3>
-    <p>Telegram bot (grammy + Agent SDK), email (IMAP + SMTP), Claude Code sessions. Always-on via Railway.</p>
+    <span class="badge badge-gold">Key Differences</span>
+    <h3>Full Comparison Table</h3>
+    <div style="margin-top:12px">
+      <div class="compare-row">
+        <span class="compare-label">Hosting</span>
+        <span class="compare-emeka">Vercel (single deploy)</span>
+        <span class="compare-jarvis">Railway (3 services in one project)</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Agent Runtime</span>
+        <span class="compare-emeka">Paperclip (external service)</span>
+        <span class="compare-jarvis">Built-in supervisor (packages/supervisor)</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Agents</span>
+        <span class="compare-emeka">Paperclip agents (external)</span>
+        <span class="compare-jarvis">11 agents (5 NATO managers + 6 workers)</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Auth</span>
+        <span class="compare-emeka">NextAuth + hardcoded password</span>
+        <span class="compare-jarvis">Supabase Auth + RBAC (admin/manager/viewer)</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Agent API</span>
+        <span class="compare-emeka">Paperclip API contract</span>
+        <span class="compare-jarvis">Same contract (GET agents, GET dashboard, POST wakeup)</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Heartbeat</span>
+        <span class="compare-emeka">Paperclip internal</span>
+        <span class="compare-jarvis">30s loop, auto-pause after 3 idle beats</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Budget</span>
+        <span class="compare-emeka">Paperclip internal</span>
+        <span class="compare-jarvis">BudgetEnforcer with per-agent daily caps</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Observability</span>
+        <span class="compare-emeka">None visible</span>
+        <span class="compare-jarvis">/observability page with health, metrics, approvals, audit</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Database</span>
+        <span class="compare-emeka">Airtable + Meta + MySQL + Supabase</span>
+        <span class="compare-jarvis">Same + agents table + profiles table</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Monorepo</span>
+        <span class="compare-emeka">Single Next.js app</span>
+        <span class="compare-jarvis">14-package TypeScript monorepo (pnpm)</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Self-Learning</span>
+        <span class="compare-emeka">None</span>
+        <span class="compare-jarvis">v2.2 engine (pattern extraction, confidence, staleness)</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Security</span>
+        <span class="compare-emeka">Basic</span>
+        <span class="compare-jarvis">Tiered security gate (auto/structured/deep), risk lanes</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label">Deployment</span>
+        <span class="compare-emeka">Vercel auto-deploy</span>
+        <span class="compare-jarvis">Railway with nixpacks + Docker backup</span>
+      </div>
+    </div>
   </div>
 
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- TAB: AGENT TEAMS -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="tab-agents">
+<!-- TAB 3: ARCHITECTURE -->
+<div class="tab-panel" id="tab-architecture" data-searchable>
 
-  <div class="card card-gold">
-    <span class="badge badge-gold">TEAM LEAD</span>
-    <h3>Alpha — Orchestrator</h3>
-    <p>Team lead. Decomposes goals, assigns tasks, manages checkpoints, reports to Christian. Spawns and coordinates all other agents.</p>
+  <div class="card card-blue">
+    <span class="badge badge-blue">7 Layers</span>
+    <h3>7-Layer Architecture</h3>
     <ul>
-      <li>Model: Claude Opus 4.6 (1M context)</li>
-      <li>Role: Supervisor / Foreman</li>
-      <li>Tools: All tools + Agent spawning</li>
+      <li><strong>Layer 7: Self-Learning</strong> &mdash; Pattern extraction, memory, improvement loop. The system learns from outcomes and stores corrections, patterns, and reflections.</li>
+      <li><strong>Layer 6: Verification</strong> &mdash; Tests, lint, screenshots, schema checks. Echo gate provides blocking quality control before any merge or promotion.</li>
+      <li><strong>Layer 5: Policy</strong> &mdash; Risk lanes (Safe / Ask-Once / Human-Only), budget tracking, acquisition protocol, rollback classification.</li>
+      <li><strong>Layer 4: State Engine</strong> &mdash; Supabase: projects, tasks, checkpoints, artifacts, approvals, runs, memory, budgets.</li>
+      <li><strong>Layer 3: Workers</strong> &mdash; Builder, Researcher, Tester, Deployer, Debugger. Each inherits from BaseWorker with tool access and heartbeat.</li>
+      <li><strong>Layer 2: Supervisor</strong> &mdash; Alpha brain: decompose task graphs, delegate to fleet, verify results, report back. Foreman constraints and auto-pause.</li>
+      <li><strong>Layer 1: Communication</strong> &mdash; Telegram bot, Claude Code CLI, Dashboard UI, Email (IMAP + nodemailer).</li>
     </ul>
   </div>
 
-  <div class="agent-grid">
+  <div class="flow-arrow"><span>&#9660;</span></div>
+
+  <div class="card card-teal">
+    <span class="badge badge-teal">Request Flow</span>
+    <h3>Request Flow</h3>
+    <p>How a task moves through the system from input to completion:</p>
+    <ul>
+      <li><strong>1.</strong> User sends task (Telegram / Dashboard / Claude Code)</li>
+      <li><strong>2.</strong> Supervisor decomposes into task graph with dependencies</li>
+      <li><strong>3.</strong> Policy engine checks risk lane + budget availability</li>
+      <li><strong>4.</strong> Fleet manager assigns to available agent based on role match</li>
+      <li><strong>5.</strong> Agent executes with tool access, heartbeating every 30s</li>
+      <li><strong>6.</strong> Verification pipeline validates result (Echo cheap + heavy gates)</li>
+      <li><strong>7.</strong> Memory engine extracts patterns from outcome</li>
+      <li><strong>8.</strong> Report back to user via original channel</li>
+    </ul>
+  </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
+
+  <div class="card card-green">
+    <span class="badge badge-green">State Machine</span>
+    <h3>Task Lifecycle</h3>
+    <p>Every task follows this state machine:</p>
+    <ul>
+      <li><strong>proposed</strong> &rarr; <strong>accepted</strong> &rarr; <strong>in_progress</strong> &rarr; <strong>verification</strong> &rarr; <strong>done</strong> &rarr; <strong>archived</strong></li>
+      <li><strong>in_progress</strong> &rarr; <strong>blocked</strong> &rarr; (awaiting_human | awaiting_dependency) &rarr; <strong>in_progress</strong></li>
+      <li><strong>accepted</strong> &rarr; <strong>rejected</strong> (bounced back with reason)</li>
+    </ul>
+    <p style="margin-top:8px">Max task duration: 30 min per agent. Stale threshold: untouched 2 cycles. Blocked escalation: blocked &gt;1 cycle triggers Head of Operations.</p>
+  </div>
+
+</div>
+
+<!-- TAB 4: AGENT TEAMS -->
+<div class="tab-panel" id="tab-agents" data-searchable>
+
+  <div class="card card-purple">
+    <span class="badge badge-purple">NATO Fleet</span>
+    <h3>NATO Manager Fleet</h3>
+    <p>Five persistent managers using NATO phonetic alphabet. Each manager spawns numbered sub-agents and uses git worktree isolation:</p>
+    <ul>
+      <li><strong>Alpha &mdash; Deploy &amp; Infrastructure Manager</strong> &mdash; Docker, CI/CD, Railway, env validation, healthchecks. Branch: alpha/{task-slug}</li>
+      <li><strong>Bravo &mdash; Frontend &amp; Dashboard Manager</strong> &mdash; Dashboard components, UI testing, frontend coverage. Branch: bravo/{task-slug}</li>
+      <li><strong>Charlie &mdash; E2E Test Manager</strong> &mdash; End-to-end test infrastructure, critical flow tests. Branch: charlie/{task-slug}</li>
+      <li><strong>Delta &mdash; Integration Test Manager</strong> &mdash; Cross-package integration, data flow validation. Branch: delta/{task-slug}</li>
+      <li><strong>Echo &mdash; Verification &amp; Quality Gate</strong> &mdash; Final verification sweeps, quality enforcement. BLOCKING gate &mdash; FAIL = no merge. Reads across all worktrees but does NOT write.</li>
+    </ul>
+  </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
+
+  <div class="card card-teal">
+    <span class="badge badge-teal">Workers</span>
+    <h3>Worker Agents</h3>
+    <p>Six specialized workers that execute tasks assigned by managers:</p>
+    <ul>
+      <li><strong>Morning Briefing</strong> &mdash; Daily briefing agent (6AM cron). Pulls Meta Ads, leads, content, tasks. Delivers summary to Telegram.</li>
+      <li><strong>Ad Monitor</strong> &mdash; Ad &amp; competitor monitor (every 4 hours). Tracks changes in competitor ads and landing pages.</li>
+      <li><strong>Content Pipeline</strong> &mdash; Content pipeline agent (9AM weekdays). Reviews calendar, drafts content for gaps.</li>
+      <li><strong>Jarvis</strong> &mdash; Core task decomposition agent. Routes and delegates work to appropriate workers.</li>
+      <li><strong>Builder</strong> &mdash; Code generation worker. Writes code, creates files, implements features.</li>
+      <li><strong>Researcher</strong> &mdash; Research worker. Web search, docs, codebase analysis. Read-only.</li>
+    </ul>
+  </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
+
+  <div class="card card-green">
+    <span class="badge badge-green">Lifecycle</span>
+    <h3>Agent Lifecycle</h3>
+    <p>Every agent follows this lifecycle with automatic state management:</p>
+    <ul>
+      <li><strong>idle</strong> &rarr; <strong>running</strong> (via wake command or schedule trigger)</li>
+      <li><strong>running</strong> &rarr; heartbeat every 30 seconds while active</li>
+      <li><strong>running</strong> &rarr; <strong>idle</strong> (auto-pause after 3 consecutive idle heartbeats)</li>
+      <li><strong>idle</strong> &rarr; <strong>running</strong> (wake again via API or schedule)</li>
+    </ul>
+    <p style="margin-top:8px">Budget enforced per agent with daily caps. Approval required for Lane 2/3 actions. Fleet manager tracks all agent states in Supabase agents table.</p>
+  </div>
+
+</div>
+
+<!-- TAB 5: PACKAGES -->
+<div class="tab-panel" id="tab-packages" data-searchable>
+
+  <div class="pkg-grid">
+
     <div class="card card-blue">
-      <span class="badge badge-blue">BUILDER</span>
-      <h3>Bravo</h3>
-      <p>Code generation specialist. Writes TypeScript, builds features, creates files. Deployed Phases 3 and 4 (Workers + Verification + Policy).</p>
-      <ul>
-        <li>Model: Claude Sonnet/Opus</li>
-        <li>Output: Code files, git commits</li>
-      </ul>
-    </div>
-
-    <div class="card card-green">
-      <span class="badge badge-green">BUILDER</span>
-      <h3>Charlie</h3>
-      <p>Builder + configuration specialist. Created CLAUDE.md, agent definitions, .env.example. Handles project structure and documentation.</p>
-      <ul>
-        <li>Model: Claude Sonnet/Opus</li>
-        <li>Output: Config, docs, agents</li>
-      </ul>
-    </div>
-
-    <div class="card card-purple">
-      <span class="badge badge-purple">BUILDER</span>
-      <h3>Delta</h3>
-      <p>Infrastructure specialist. Built Supabase schema (8 tables, 21 indexes, RLS), email package, memory package fixes.</p>
-      <ul>
-        <li>Model: Claude Sonnet/Opus</li>
-        <li>Output: DB, infra, integrations</li>
-      </ul>
+      <span class="badge badge-blue">Core</span>
+      <h3>@jarvis/core</h3>
+      <p>Shared types, config, logger, error classes. Houses v2.2 acquisition, confidence, lifecycle, and observability types. Every other package depends on this.</p>
     </div>
 
     <div class="card card-teal">
-      <span class="badge badge-teal">RESEARCHER</span>
-      <h3>Echo</h3>
-      <p>Research and analysis. Explored Assistant, ClaudeOS, and Spark repos. Built Phase 5 Self-Learning engine. First to check in, last to leave.</p>
-      <ul>
-        <li>Model: Claude Sonnet/Opus</li>
-        <li>Output: Research reports, analysis</li>
-      </ul>
+      <span class="badge badge-teal">State</span>
+      <h3>@jarvis/state</h3>
+      <p>Supabase CRUD for all tables. Repository pattern for data access. Observability events, echo overrides, task lifecycle transitions.</p>
     </div>
-  </div>
 
-  <div class="flow-arrow"><span>&#8595;</span></div>
+    <div class="card card-purple">
+      <span class="badge badge-purple">Brain</span>
+      <h3>@jarvis/supervisor</h3>
+      <p>Alpha brain &mdash; execution loop, decomposition, scheduling, dispatch. Foreman constraints, auto-pause, interrupt contract, alerts, telemetry baseline, queue governance.</p>
+    </div>
 
-  <div class="card card-coral">
-    <span class="badge badge-coral">SPECIALIST TEAMS</span>
-    <h3>On-Demand Research Agents</h3>
-    <p>28+ agents spawned across the full build. Specialists for research, building, security, debugging, and deployment:</p>
-    <ul>
-      <li><strong>dashboard-researcher</strong> — Agent observability tools comparison</li>
-      <li><strong>repo-scanner</strong> — GitHub repos for agent dashboards (10 repos audited)</li>
-      <li><strong>arch-researcher</strong> — Real-time dashboard architecture (Supabase Realtime + Next.js)</li>
-      <li><strong>telegram-ux</strong> — Conversational bot UX patterns</li>
-      <li><strong>companion-reverser-1/2</strong> — Crankbill companion system reverse engineering</li>
-      <li><strong>channels-researcher</strong> — Claude Code Channels + Agent SDK analysis</li>
-      <li><strong>security-audit</strong> — Full OWASP security review (2 CRITICAL, 6 HIGH found + fixed)</li>
-      <li><strong>team-channels</strong> — Telegram Channels plugin setup</li>
-      <li><strong>team-agentsdk</strong> — Agent SDK integration build</li>
-      <li><strong>webhook-researcher</strong> — Grammy webhook patterns + Railway setup</li>
-      <li><strong>409-debugger</strong> — Telegram 409 conflict diagnosis and resolution</li>
-      <li><strong>railway-deployer</strong> — Railway deployment, env config, health checks</li>
-      <li><strong>dockerfile-builder</strong> — Multi-stage Docker build optimization</li>
-      <li><strong>state-debugger</strong> — Supabase schema debugging and migration fixes</li>
-      <li><strong>config-auditor</strong> — CLAUDE.md, tsconfig, package.json consistency</li>
-      <li><strong>lint-fixer</strong> — Biome lint/format auto-fix across all packages</li>
-      <li><strong>type-checker</strong> — TypeScript strict mode error resolution</li>
-      <li><strong>dep-resolver</strong> — pnpm workspace dependency resolution</li>
-      <li><strong>test-writer</strong> — Vitest test generation for core + state + workers</li>
-      <li><strong>env-validator</strong> — Environment variable validation and .env.example sync</li>
-      <li><strong>ops-map-builder</strong> — This operations map (HTML/CSS/JS)</li>
-      <li><strong>dashboard-builder</strong> — Next.js command center dashboard</li>
-      <li><strong>email-architect</strong> — IMAP/SMTP email system design</li>
-      <li><strong>memory-architect</strong> — Self-learning engine pattern extraction</li>
-      <li><strong>policy-builder</strong> — Risk lane classification + budget enforcement</li>
-      <li><strong>verification-builder</strong> — Secret scanner + test/lint/typecheck pipeline</li>
-      <li><strong>supervisor-builder</strong> — Alpha brain execution loop</li>
-      <li><strong>worker-builder</strong> — BaseWorker + Builder/Researcher/Tester workers</li>
-    </ul>
+    <div class="card card-green">
+      <span class="badge badge-green">Workers</span>
+      <h3>@jarvis/workers</h3>
+      <p>Worker definitions: Builder, Researcher, Tester, Deployer, Debugger. Memento heartbeat system. Scoped roster (workers see only their manager + handoff targets).</p>
+    </div>
+
+    <div class="card card-coral">
+      <span class="badge badge-coral">Telegram</span>
+      <h3>@jarvis/telegram</h3>
+      <p>Telegram bot (grammy). Message handlers, inline keyboards, formatting. Webhook mode for Railway deployment.</p>
+    </div>
+
+    <div class="card card-gold">
+      <span class="badge badge-gold">Email</span>
+      <h3>@jarvis/email</h3>
+      <p>Gmail integration. Send, read, poll, templates. IMAP + nodemailer for full email lifecycle.</p>
+    </div>
+
+    <div class="card card-pink">
+      <span class="badge badge-pink">Verification</span>
+      <h3>@jarvis/verification</h3>
+      <p>Verification pipeline: tests, lint, typecheck, secret scan. Echo cheap/heavy gates. Tiered security gate (Tier 0 auto / Tier 1 structured / Tier 2 deep analysis).</p>
+    </div>
+
+    <div class="card card-orange">
+      <span class="badge badge-orange">Policy</span>
+      <h3>@jarvis/policy</h3>
+      <p>Policy engine: risk lanes, budget tracking. Relevance gate, acquisition budget enforcement, rollback classification, expert repo scaffold generation.</p>
+    </div>
+
+    <div class="card card-blue">
+      <span class="badge badge-blue">Memory</span>
+      <h3>@jarvis/memory</h3>
+      <p>Self-learning engine. Pattern extraction from task outcomes, retrieval by similarity. Deterministic confidence scoring (0-10 weighted rubric). Staleness tracking with 60-day decay.</p>
+    </div>
+
+    <div class="card card-teal">
+      <span class="badge badge-teal">Dashboard</span>
+      <h3>@jarvis/dashboard</h3>
+      <p>Next.js dashboard + observability data layer. 49 pages. Supabase Auth integration. API routes proxying to jarvis-runtime.</p>
+    </div>
+
+    <div class="card card-purple">
+      <span class="badge badge-purple">Agent</span>
+      <h3>@jarvis/agent</h3>
+      <p>Agent SDK integration. Claude Agent SDK patterns for tool use, memory, and structured agent communication.</p>
+    </div>
+
+    <div class="card card-green">
+      <span class="badge badge-green">Firecrawl</span>
+      <h3>@jarvis/firecrawl</h3>
+      <p>Web scraping and crawling integration via Firecrawl. Used by Researcher agents for deep web research and content extraction.</p>
+    </div>
+
+    <div class="card card-gold">
+      <span class="badge badge-gold">Orchestrator</span>
+      <h3>@jarvis/orchestrator</h3>
+      <p>Multi-model orchestration. Routes between Claude, OpenAI, Gemini, and Perplexity based on task type and model selection strategy.</p>
+    </div>
+
+    <div class="card card-coral">
+      <span class="badge badge-coral">E2E</span>
+      <h3>@jarvis/e2e</h3>
+      <p>End-to-end test suite. Playwright-based tests for critical user flows across the dashboard and API.</p>
+    </div>
+
   </div>
 
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- TAB: PACKAGES -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="tab-packages">
+<!-- TAB 6: COMMUNICATION -->
+<div class="tab-panel" id="tab-communication" data-searchable>
 
-  <div class="card card-blue">
-    <span class="badge badge-blue">@jarvis/core — 7.0 KB</span>
-    <h3>Core Types + Config</h3>
-    <p>Branded ID types (ProjectId, TaskId, etc.), domain models, enums, input/output types, config loader, structured logger, error classes.</p>
-    <span class="url">packages/core/src/ — types.ts, config.ts, logger.ts, errors.ts, index.ts</span>
+  <div class="card card-coral">
+    <span class="badge badge-coral">Primary</span>
+    <h3>Telegram Bot</h3>
+    <p>Primary user interface powered by grammy. Deployed on Railway in webhook mode.</p>
+    <ul>
+      <li>Task submission via natural language messages</li>
+      <li>Inline keyboard for approval gates (approve/reject/escalate)</li>
+      <li>Daily briefing delivery (6AM cron)</li>
+      <li>Real-time status updates on running tasks</li>
+      <li>Rich formatting for reports and summaries</li>
+    </ul>
+    <span class="url">jarvis-bot-production-fbba.up.railway.app</span>
   </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-teal">
-    <span class="badge badge-teal">@jarvis/state — 16.9 KB</span>
-    <h3>Supabase State Engine</h3>
-    <p>Full CRUD for all 8 tables. Projects, tasks, checkpoints, artifacts, approvals, runs, memory, budgets. Supabase client singleton.</p>
-    <span class="url">packages/state/src/ — client.ts, projects.ts, tasks.ts, checkpoints.ts, memory.ts, approvals.ts, runs.ts, budgets.ts, artifacts.ts</span>
+    <span class="badge badge-teal">Dashboard</span>
+    <h3>Next.js Dashboard</h3>
+    <p>49-page operations dashboard. The full command center UI:</p>
+    <ul>
+      <li>Content management &amp; calendar</li>
+      <li>Ad campaigns &amp; analytics</li>
+      <li>Lead management &amp; outreach</li>
+      <li>Media library &amp; video</li>
+      <li>Meetings &amp; calendar</li>
+      <li>Tasks, invoices, wiki, competitors</li>
+      <li>System observability (health, metrics, approvals, audit)</li>
+      <li>Agent fleet management</li>
+    </ul>
+    <span class="url">command-center-production-34b8.up.railway.app</span>
   </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-gold">
-    <span class="badge badge-gold">@jarvis/supervisor — 11.0 KB</span>
-    <h3>Alpha Brain</h3>
-    <p>Main execution loop (runSupervisorStep + runSupervisorLoop), task decomposition, scheduling, worker dispatch, escalation, progress reporting.</p>
-    <span class="url">packages/supervisor/src/ — index.ts, decomposer.ts, scheduler.ts, dispatcher.ts, escalator.ts, reporter.ts</span>
+    <span class="badge badge-gold">Email</span>
+    <h3>Email Integration</h3>
+    <p>Full email lifecycle via IMAP + nodemailer:</p>
+    <ul>
+      <li>Send emails from configured Gmail account</li>
+      <li>Read and poll inbox for incoming tasks</li>
+      <li>Template-based email generation</li>
+      <li>Used by Morning Briefing agent for daily summaries</li>
+    </ul>
   </div>
 
-  <div class="card card-purple">
-    <span class="badge badge-purple">@jarvis/workers — 8.8 KB</span>
-    <h3>Worker Pool</h3>
-    <p>BaseWorker abstract class with Anthropic SDK integration. Builder, Researcher, Tester workers. Registry for worker routing.</p>
-    <span class="url">packages/workers/src/ — base-worker.ts, builder.ts, researcher.ts, tester.ts, registry.ts</span>
-  </div>
-
-  <div class="card card-green">
-    <span class="badge badge-green">@jarvis/telegram — 20.5 KB</span>
-    <h3>Telegram Bot + Agent Bridge</h3>
-    <p>grammy bot with Agent SDK integration. Natural conversation handler, intent routing, session persistence, typing indicators, approval keyboards.</p>
-    <span class="url">packages/telegram/src/ — index.ts, main.ts, handlers.ts, agent-bridge.ts, formatter.ts, keyboards.ts</span>
-  </div>
-
-  <div class="card card-coral">
-    <span class="badge badge-coral">@jarvis/email — 15.1 KB</span>
-    <h3>Email System</h3>
-    <p>IMAP read + SMTP send. Rate limiting, intent classification (new task, approval response, status query), HTML templates with XSS protection.</p>
-    <span class="url">packages/email/src/ — client.ts, send.ts, read.ts, templates.ts</span>
-  </div>
-
-  <div class="card card-red">
-    <span class="badge badge-red">@jarvis/verification — 13.1 KB</span>
-    <h3>Verification Engine</h3>
-    <p>Pipeline: secret scan, type check, lint, tests. Each runner uses spawn (shell: false). Fail-fast option. 11 secret patterns detected.</p>
-    <span class="url">packages/verification/src/ — index.ts, test-runner.ts, lint-runner.ts, type-checker.ts, secret-scanner.ts, schema-checker.ts</span>
-  </div>
-
-  <div class="card card-orange">
-    <span class="badge badge-orange">@jarvis/policy — 5.6 KB</span>
-    <h3>Policy Engine</h3>
-    <p>Risk lane classification, budget tracking with 80% warning threshold, 4-stage retry strategy (same, alternative, fallback, escalate).</p>
-    <span class="url">packages/policy/src/ — index.ts, risk-lanes.ts, budget.ts, retry.ts</span>
-  </div>
-
-  <div class="card card-pink">
-    <span class="badge badge-pink">@jarvis/memory — 13.9 KB</span>
-    <h3>Self-Learning Engine</h3>
-    <p>Pattern extraction from runs, confidence scoring, 3-tier promotion (auto/staged/human), memory retrieval, pattern evaluation.</p>
-    <span class="url">packages/memory/src/ — index.ts, extractor.ts, promoter.ts, retriever.ts, evaluator.ts</span>
-  </div>
-
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- TAB: COMMUNICATION -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="tab-comms">
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-blue">
-    <span class="badge badge-blue">PRIMARY CHANNEL</span>
-    <h3>Telegram — @jarvis_dlf_agent_bot</h3>
-    <p>Always-on communication. Webhook mode — no more 409 conflicts. Christian messages, Jarvis responds with full Claude Agent SDK capabilities.</p>
-    <ul>
-      <li>Webhook mode — no more 409 conflicts</li>
-      <li>Natural conversation (no /commands required)</li>
-      <li>Typing indicator while thinking</li>
-      <li>Smart model routing: Haiku for casual, Sonnet for tasks</li>
-      <li>Session persistence across messages</li>
-      <li>Inline keyboards for approvals</li>
-      <li>Intent classification: task, status, approval, casual</li>
-    </ul>
-    <span class="url">Bot ID: 8231089521 | User: @Bleupreneur (6197016393)</span>
-  </div>
-
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="card card-teal">
-    <span class="badge badge-teal">DEEP WORK</span>
-    <h3>Claude Code Sessions</h3>
-    <p>For complex builds requiring full filesystem + tool access. Alpha orchestrates via team system. Agents spawn and coordinate in parallel.</p>
-    <ul>
-      <li>Channels plugin available (Telegram as input)</li>
-      <li>Agent SDK for programmatic access</li>
-      <li>Full MCP tool access (508 GHL tools + Airtable + GitHub + more)</li>
-    </ul>
-  </div>
-
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="card card-coral">
-    <span class="badge badge-coral">AUTONOMOUS</span>
-    <h3>Email — Jarvis Account</h3>
-    <p>Jarvis's own email for autonomous communication. IMAP polling for inbox, SMTP for outbound. Rate limited (20/min). Intent classification on inbound.</p>
-    <ul>
-      <li>Lane 1: Send autonomously</li>
-      <li>Lane 2: Draft and await approval</li>
-      <li>Lane 3: Never send (compliance, legal)</li>
-    </ul>
+    <span class="badge badge-blue">CLI</span>
+    <h3>Claude Code Integration</h3>
+    <p>Direct integration with Claude Code CLI for developer-facing task submission. Tasks flow through the same supervisor &rarr; worker pipeline as Telegram and Dashboard inputs.</p>
   </div>
 
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- TAB: POLICY ENGINE -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="tab-policy">
+<!-- TAB 7: POLICY ENGINE -->
+<div class="tab-panel" id="tab-policy" data-searchable>
 
   <div class="card card-green">
-    <span class="badge badge-green">LANE 1 — SAFE AUTONOMY</span>
-    <h3>Auto-Execute (No Approval Needed)</h3>
+    <span class="badge badge-green">Lane 1 &mdash; Safe</span>
+    <h3>Lane 1: Auto-Execute</h3>
+    <p>No approval needed. Agent proceeds immediately:</p>
     <ul>
-      <li>Code generation and refactoring</li>
-      <li>Documentation updates</li>
-      <li>Internal research and analysis</li>
+      <li>Code generation and file creation</li>
+      <li>Research and web search</li>
       <li>Local builds and test runs</li>
-      <li>Staging deployments</li>
-      <li>Synthetic data operations</li>
-      <li>Git commits to feature branches</li>
+      <li>Staging deploys</li>
+      <li>Feature branch commits</li>
     </ul>
   </div>
 
-  <div class="flow-arrow"><span>&#8595;</span></div>
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-orange">
-    <span class="badge badge-orange">LANE 2 — ASK-ONCE</span>
-    <h3>Pause for Approval</h3>
+    <span class="badge badge-orange">Lane 2 &mdash; Ask-Once</span>
+    <h3>Lane 2: Pause for Approval</h3>
+    <p>Requires one-time human approval before execution:</p>
     <ul>
-      <li>Architecture decisions with multiple valid paths</li>
-      <li>Production-impacting configuration</li>
-      <li>External-facing content (emails, social, client comms)</li>
-      <li>Database migration plans</li>
-      <li>Permission/scope changes</li>
-      <li>Deploying to production</li>
-      <li>Creating PRs to main</li>
+      <li>Architecture decisions</li>
+      <li>Production config changes</li>
+      <li>External communications (email, Slack)</li>
+      <li>Database migrations</li>
+      <li>Production deploys</li>
     </ul>
   </div>
 
-  <div class="flow-arrow"><span>&#8595;</span></div>
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-red">
-    <span class="badge badge-red">LANE 3 — HUMAN-ONLY</span>
-    <h3>Never Auto-Execute</h3>
+    <span class="badge badge-red">Lane 3 &mdash; Human-Only</span>
+    <h3>Lane 3: Never Auto-Execute</h3>
+    <p>Always requires explicit human action:</p>
     <ul>
       <li>Production data deletion</li>
-      <li>Legal/compliance language</li>
-      <li>Live social media posting</li>
-      <li>Billing/pricing changes</li>
-      <li>Secret rotation or auth scope changes</li>
-      <li>Destructive CRM mutations (bulk deletes)</li>
-      <li>Force pushing to main</li>
+      <li>Legal and compliance decisions</li>
+      <li>Live social media posts</li>
+      <li>Billing changes</li>
+      <li>Secret rotation</li>
+      <li>Force push to main</li>
     </ul>
   </div>
 
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="card card-blue">
-    <span class="badge badge-blue">RETRY STRATEGY</span>
-    <h3>4-Stage Recovery</h3>
-    <ul>
-      <li><strong>Attempt 1:</strong> Same action, same strategy</li>
-      <li><strong>Attempt 2:</strong> Alternative strategy (different approach)</li>
-      <li><strong>Attempt 3:</strong> Fallback tool or simplified approach</li>
-      <li><strong>Attempt 4+:</strong> Escalate to Christian with full diagnosis</li>
-    </ul>
-  </div>
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-purple">
-    <span class="badge badge-purple">BUDGET ENFORCEMENT</span>
-    <h3>Resource Limits Per Project</h3>
+    <span class="badge badge-purple">Budget</span>
+    <h3>Budget Enforcement</h3>
+    <p>BudgetEnforcer tracks token usage per agent with configurable daily caps. When an agent exceeds its budget:</p>
     <ul>
-      <li>Max steps: 100 (configurable)</li>
-      <li>Max tokens: 1,000,000</li>
-      <li>Max retries: 10</li>
-      <li>Max runtime: 24 hours</li>
-      <li>Warning at 80% consumed</li>
-      <li>Hard stop at 100%</li>
+      <li>Agent is auto-paused</li>
+      <li>Alert fires (Medium severity)</li>
+      <li>Head of Operations is notified</li>
+      <li>Budget resets at midnight UTC</li>
     </ul>
   </div>
 
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- TAB: INFRASTRUCTURE -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="tab-infra">
-
-  <div class="card card-teal">
-    <span class="badge badge-teal">DATABASE</span>
-    <h3>Supabase — vqvengibcpqiktpxlvbg</h3>
-    <p>Postgres 17 + pgvector. 8 tables with RLS. Service role access for backend. Region: us-east-1.</p>
-    <ul>
-      <li>projects, tasks, checkpoints, artifacts</li>
-      <li>approvals, runs, memory, budgets</li>
-      <li>21 indexes, 4 auto-update triggers</li>
-      <li>Realtime subscriptions for dashboard</li>
-    </ul>
-    <span class="url">https://vqvengibcpqiktpxlvbg.supabase.co</span>
-  </div>
-
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="card card-blue">
-    <span class="badge badge-blue">COMPUTE</span>
-    <h3>Railway — jarvis-bot</h3>
-    <p>Always-on Node.js 22 container. Webhook mode (no polling) + health check on port 8080. Auto-restarts on crash.</p>
-    <ul>
-      <li>Service: jarvis-bot (Telegram + Agent SDK)</li>
-      <li>Webhook mode (no polling) — no more 409 conflicts</li>
-      <li>Dockerfile: Node 22 Alpine + pnpm</li>
-      <li>Environment: 11 variables configured</li>
-    </ul>
-    <span class="url">https://jarvis-bot-production-fbba.up.railway.app</span>
-  </div>
-
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="card card-purple">
-    <span class="badge badge-purple">AI MODELS</span>
-    <h3>Multi-Model Routing</h3>
-    <ul>
-      <li><strong>Claude Opus 4.6:</strong> Orchestration, architecture, deep reasoning</li>
-      <li><strong>Claude Sonnet 4:</strong> Task execution, code generation, complex queries</li>
-      <li><strong>Claude Haiku 4.5:</strong> Casual chat, quick lookups, 3x faster</li>
-      <li><strong>Fallback:</strong> OpenAI, Gemini (configured, not primary)</li>
-    </ul>
-  </div>
-
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="card card-green">
-    <span class="badge badge-green">MCP SERVERS</span>
-    <h3>External Tool Access</h3>
-    <ul>
-      <li><strong>dlf-agency:</strong> 508 GHL CRM tools (contacts, workflows, calendars, invoices, etc.)</li>
-      <li><strong>Airtable:</strong> Bases, records, fields, tables</li>
-      <li><strong>GitHub:</strong> Repos, PRs, issues, code search</li>
-      <li><strong>Supabase:</strong> SQL, migrations, edge functions</li>
-      <li><strong>Slack:</strong> Channels, messages, search</li>
-      <li><strong>Cloudflare:</strong> Workers, KV, D1, R2</li>
-      <li><strong>Vercel:</strong> Deployments, projects, domains</li>
-    </ul>
-  </div>
-
-  <div class="card card-coral">
-    <span class="badge badge-coral">SECURITY</span>
-    <h3>Hardening Applied</h3>
-    <ul>
-      <li>shell: false on all spawn() calls</li>
-      <li>UUID validation on approval IDs</li>
-      <li>escapeHtml() on all email templates</li>
-      <li>Credential sanitization in IMAP errors</li>
-      <li>Wildcard injection prevention in ilike queries</li>
-      <li>Secrets in ~/.env.secrets (chmod 600)</li>
-      <li>.env in .gitignore, never committed</li>
-    </ul>
-  </div>
-
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<!-- TAB: SELF-LEARNING -->
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="tab-learning">
-
-  <div class="card card-purple">
-    <span class="badge badge-purple">PATTERN EXTRACTION</span>
-    <h3>Learn From Every Run</h3>
-    <p>After each worker completes a task, the extractor analyzes: what strategy was used, how long it took, token efficiency, whether retries were needed.</p>
-    <ul>
-      <li>Success patterns: working strategy + worker type + approach</li>
-      <li>Failure patterns: error messages + anti-patterns to avoid</li>
-      <li>Correction patterns: retry sequences that eventually succeeded</li>
-      <li>Confidence scoring based on speed, token efficiency, retry count</li>
-    </ul>
-  </div>
-
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="diamond">
-    <div class="diamond-box"><span class="diamond-label">What promotion tier?</span></div>
-    <div class="diamond-paths">
-      <div class="diamond-path"><strong>TIER 0 (Auto)</strong>Confidence >= 0.90, validated 3+ times, passes eval</div>
-      <div class="diamond-path"><strong>TIER 1 (Staged)</strong>Confidence 0.70-0.89, needs review before promoting</div>
-      <div class="diamond-path"><strong>TIER 2 (Human)</strong>External writes, credentials, compliance-related</div>
-    </div>
-  </div>
-
-  <div class="flow-arrow"><span>&#8595;</span></div>
-
-  <div class="card card-teal">
-    <span class="badge badge-teal">MEMORY RETRIEVAL</span>
-    <h3>Before Similar Tasks</h3>
-    <p>Query memory table for relevant patterns by tags, type, and content. Return top-N most relevant memories sorted by confidence. Inject into worker context.</p>
-    <ul>
-      <li>Semantic search via pgvector embeddings</li>
-      <li>Tag-based filtering (worker type, project, tool used)</li>
-      <li>Confidence-weighted ranking</li>
-      <li>Stale pattern detection via evaluator</li>
-    </ul>
-  </div>
-
-  <div class="flow-arrow"><span>&#8595;</span></div>
+  <div class="flow-arrow"><span>&#9660;</span></div>
 
   <div class="card card-gold">
-    <span class="badge badge-gold">INHERITED FROM</span>
-    <h3>Three Foundation Projects</h3>
+    <span class="badge badge-gold">Approval</span>
+    <h3>Approval Gates</h3>
+    <p>Lane 2/3 actions trigger an approval flow:</p>
     <ul>
-      <li><strong>ClaudeOS:</strong> 5-layer memory architecture, workforce system, agent templates, hooks, self-improvement loop</li>
-      <li><strong>Assistant (Bleu):</strong> Persona definition, context files, EA skills, session lifecycle</li>
-      <li><strong>Spark Intelligence:</strong> JSONL event schema, 3-tier promotion, benchmarks, confidence scoring, cron execution</li>
+      <li>Task pauses and enters <strong>awaiting_human</strong> state</li>
+      <li>Telegram inline keyboard sent to admin (Approve / Reject / Escalate)</li>
+      <li>30-minute timeout &mdash; task marked <strong>awaiting_human</strong>, system moves to next task</li>
+      <li>Max 2 interrupts per task stage; remaining questions batched</li>
+    </ul>
+  </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
+
+  <div class="card card-pink">
+    <span class="badge badge-pink">Rollback</span>
+    <h3>Rollback Classification</h3>
+    <p>Every mutating action is classified for rollback capability:</p>
+    <ul>
+      <li><strong>Fully reversible</strong> &rarr; Manager approval sufficient</li>
+      <li><strong>Conditionally reversible</strong> &rarr; Head of Operations approval required</li>
+      <li><strong>Irreversible</strong> &rarr; Human approval + Tier 2 security review required</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- TAB 8: OBSERVABILITY -->
+<div class="tab-panel" id="tab-observability" data-searchable>
+
+  <div class="card card-green">
+    <span class="badge badge-green">Endpoint</span>
+    <h3>Health Endpoint</h3>
+    <p>GET /api/observability/health &mdash; Returns system health status including:</p>
+    <ul>
+      <li>All 3 Railway service statuses</li>
+      <li>Supabase connection health</li>
+      <li>Agent fleet summary (running/idle/paused counts)</li>
+      <li>Last heartbeat timestamps per agent</li>
+    </ul>
+  </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
+
+  <div class="card card-blue">
+    <span class="badge badge-blue">Endpoint</span>
+    <h3>Metrics Endpoint</h3>
+    <p>GET /api/observability/metrics &mdash; Returns operational metrics:</p>
+    <ul>
+      <li>Task throughput (completed/failed per hour)</li>
+      <li>Agent productivity (idle vs productive time)</li>
+      <li>Budget utilization per agent</li>
+      <li>Confidence score distribution</li>
+      <li>Queue health (stale, blocked, avg lifetime)</li>
+    </ul>
+  </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
+
+  <div class="card card-orange">
+    <span class="badge badge-orange">Endpoint</span>
+    <h3>Approvals Endpoint</h3>
+    <p>GET /api/observability/approvals &mdash; Returns pending and historical approvals:</p>
+    <ul>
+      <li>Pending approval requests with context</li>
+      <li>Approval/rejection history</li>
+      <li>Average response time</li>
+      <li>Timeout rate (30-min threshold)</li>
+    </ul>
+  </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
+
+  <div class="card card-purple">
+    <span class="badge badge-purple">Endpoint</span>
+    <h3>Audit Endpoint</h3>
+    <p>GET /api/observability/audit &mdash; Returns audit trail:</p>
+    <ul>
+      <li>All mutating actions with timestamps and actors</li>
+      <li>Rollback events and recovery status</li>
+      <li>Echo override history</li>
+      <li>Security gate results (Tier 0/1/2)</li>
+    </ul>
+  </div>
+
+  <div class="flow-arrow"><span>&#9660;</span></div>
+
+  <div class="card card-red">
+    <span class="badge badge-red">Alerts</span>
+    <h3>Alert Conditions (8 Rules)</h3>
+    <ul>
+      <li><strong>Echo override spike</strong> (High) &mdash; 3+ overrides on same check in 7 days</li>
+      <li><strong>Rollback failure</strong> (Critical) &mdash; Any rollback that doesn't fully succeed</li>
+      <li><strong>Blocked-human pileup</strong> (High) &mdash; 5+ tasks awaiting_human simultaneously</li>
+      <li><strong>Acquisition cost explosion</strong> (Medium) &mdash; Single acquisition exceeds 2x budget ceiling</li>
+      <li><strong>Stale queue</strong> (Medium) &mdash; 10+ tasks untouched for 2+ cycles</li>
+      <li><strong>Low-confidence action</strong> (High) &mdash; Auto-promote attempt with confidence &lt; Medium</li>
+      <li><strong>Budget breach</strong> (Medium) &mdash; Any agent exceeds token budget</li>
+      <li><strong>Merge conflict storm</strong> (Medium) &mdash; 3+ conflicts in single merge cycle</li>
     </ul>
   </div>
 
@@ -700,15 +782,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <div class="legend">
   <h3>Color Legend</h3>
   <div class="legend-items">
-    <div class="legend-item"><div class="legend-swatch" style="background:var(--blue)"></div>Core / Primary Systems</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:var(--green)"></div>Capabilities / Safe Lane</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:var(--teal)"></div>Processes / Execution</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:var(--purple)"></div>AI / Learning / Workers</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:var(--gold)"></div>Orchestration / Leadership</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:var(--orange)"></div>Warnings / Ask-Once Lane</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:var(--red)"></div>Critical / Human-Only Lane</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:var(--coral)"></div>Specialist / On-Demand</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:var(--pink)"></div>Self-Learning / Memory</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--green)"></div>Active / Healthy</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--blue)"></div>Information</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--teal)"></div>Process / Flow</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--purple)"></div>AI / Agent</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--gold)"></div>Milestone</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--orange)"></div>Warning</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--red)"></div>Critical</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--pink)"></div>Security</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--coral)"></div>Supplementary</div>
   </div>
 </div>
 
@@ -717,83 +799,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <!-- SIDEBAR -->
 <div class="sidebar">
 
-  <div class="card card-blue">
+  <div class="card card-teal">
     <h3>Quick Links</h3>
     <ul>
-      <li><a href="https://railway.com/project/7c9ba946-490b-4c2b-a3f1-ef41b7e3e6e1" target="_blank">Railway Dashboard</a></li>
-      <li><a href="https://supabase.com/dashboard/project/vqvengibcpqiktpxlvbg" target="_blank">Supabase Dashboard</a></li>
-      <li><a href="https://t.me/jarvis_dlf_agent_bot" target="_blank">Telegram: @jarvis_dlf_agent_bot</a></li>
-      <li><a href="https://dashboard-roan-three-55.vercel.app" target="_blank">Command Center Dashboard</a></li>
+      <li><a href="#">Dashboard</a> &mdash; command-center</li>
+      <li><a href="#">Agents</a> &mdash; jarvis-runtime</li>
+      <li><a href="#">Observability</a> &mdash; /observability</li>
+      <li><a href="#">GitHub Repo</a> &mdash; Jarvis monorepo</li>
     </ul>
   </div>
 
-  <div class="card card-teal">
-    <h3>Tech Stack</h3>
+  <div class="card card-blue">
+    <h3>Timeline</h3>
     <ul>
-      <li>TypeScript (strict) + pnpm</li>
-      <li>Node.js 22+</li>
-      <li>Supabase (Postgres + pgvector)</li>
-      <li>Railway (always-on)</li>
-      <li>Grammy (Telegram)</li>
-      <li>Claude Agent SDK</li>
-      <li>Anthropic API</li>
-      <li>Biome (lint/format)</li>
-      <li>Vitest (testing)</li>
-      <li>Docker (Alpine)</li>
-    </ul>
-  </div>
-
-  <div class="card card-gold">
-    <h3>Build Team</h3>
-    <ul>
-      <li><strong>Alpha</strong> — Team Lead / Orchestrator</li>
-      <li><strong>Bravo</strong> — Builder (Workers, Verification, Policy)</li>
-      <li><strong>Charlie</strong> — Builder (CLAUDE.md, Agents, Config)</li>
-      <li><strong>Delta</strong> — Builder (Supabase, Email, Memory)</li>
-      <li><strong>Echo</strong> — Researcher (Repos, Self-Learning)</li>
-    </ul>
-  </div>
-
-  <div class="card card-purple">
-    <h3>Build Timeline</h3>
-    <ul>
-      <li>Phase 1: Foundation — Done</li>
-      <li>Phase 2: Communication — Done</li>
-      <li>Phase 3: Workers — Done</li>
-      <li>Phase 4: Verification + Policy — Done</li>
-      <li>Phase 5: Self-Learning — Done</li>
-      <li>Phase 6: Deployment — Done</li>
-      <li>Security Audit — 5 fixes applied</li>
-      <li>Agent SDK Integration — Done</li>
-      <li>Telegram Live — Deployed</li>
-    </ul>
-  </div>
-
-  <div class="card card-orange">
-    <h3>Next Up</h3>
-    <ul>
-      <li>Command Center Dashboard (Next.js + Supabase Realtime)</li>
-      <li>Email account activation</li>
-      <li><s>Execution bridge (chat to supervisor)</s> Done</li>
-      <li>Conversation persistence (Supabase)</li>
-      <li><s>Agent SDK Integration</s> Done</li>
-      <li>Multi-tenant user system</li>
-      <li>Dr. Emeka bot (@bleudaddybot)</li>
-      <li>Always-on monitoring agents</li>
-      <li>Vitest test suite</li>
+      <li><strong>Phase 1 (Deploy):</strong> Apr 5</li>
+      <li><strong>Phase 2 (Runtime):</strong> Apr 5</li>
+      <li><strong>Phase 3 (Observability):</strong> Apr 5</li>
+      <li><strong>Phase 4 (Auth):</strong> Apr 5</li>
     </ul>
   </div>
 
   <div class="card card-green">
-    <h3>Key Files</h3>
+    <h3>Tech Stack</h3>
     <ul>
-      <li>CLAUDE.md — Project manifest</li>
-      <li>.env.example — Env template</li>
-      <li>Dockerfile — Railway deploy</li>
-      <li>supabase/migrations/ — Schema</li>
-      <li>docs/specs/ — Design spec</li>
-      <li>docs/research/ — Channels + SDK</li>
-      <li>docs/setup/ — Telegram Channels</li>
+      <li>TypeScript (strict)</li>
+      <li>Next.js 14</li>
+      <li>Supabase (Postgres + pgvector)</li>
+      <li>Railway (3 services)</li>
+      <li>pnpm workspaces</li>
+      <li>Biome (lint + format)</li>
+      <li>Vitest + Playwright</li>
+      <li>grammy (Telegram)</li>
+    </ul>
+  </div>
+
+  <div class="card card-purple">
+    <h3>Contacts</h3>
+    <ul>
+      <li><strong>Admin:</strong> admin@drleadflow.com</li>
     </ul>
   </div>
 
@@ -801,38 +844,74 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 
 </div><!-- /main-wrap -->
 
-<footer class="footer">Jarvis AI Employee Runtime &copy; 2026 — Built by Team Jarvis for Christian Devries</footer>
+<!-- FOOTER -->
+<footer class="footer">
+  Jarvis Command Center &mdash; AI Employee Runtime &copy; <span id="yr"></span>
+</footer>
 
 <script>
-// Tab switching
-document.querySelectorAll('.tab-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');
-    const panel=document.getElementById('tab-'+btn.dataset.tab);
-    if(panel)panel.classList.add('active');
-  });
-});
+(function(){
+  // Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
 
-// Search
-document.getElementById('searchInput').addEventListener('input',function(){
-  const q=this.value.toLowerCase().trim();
-  if(!q){
-    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-    document.querySelector('.tab-panel').classList.add('active');
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelector('.tab-btn').classList.add('active');
-    document.querySelectorAll('.card').forEach(c=>c.style.display='');
-    return;
-  }
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.add('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.content-area .card').forEach(card=>{
-    const text=card.textContent.toLowerCase();
-    card.style.display=text.includes(q)?'':'none';
+  // Tab switching
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  var panels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      tabBtns.forEach(function(b){ b.classList.remove('active'); });
+      panels.forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      var target = btn.getAttribute('data-tab');
+      document.getElementById('tab-' + target).classList.add('active');
+      document.getElementById('searchInput').value = '';
+      showAll();
+    });
   });
-});
+
+  // Search filtering
+  var input = document.getElementById('searchInput');
+  input.addEventListener('input', function(){
+    var q = input.value.toLowerCase().trim();
+    if(!q){ showAll(); return; }
+    // Search across ALL tabs
+    panels.forEach(function(panel){
+      var cards = panel.querySelectorAll('.card, .diamond, .tier-col');
+      var anyVisible = false;
+      cards.forEach(function(card){
+        var text = card.textContent.toLowerCase();
+        if(text.indexOf(q) !== -1){
+          card.style.display = '';
+          anyVisible = true;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      // Show arrows only if adjacent cards are visible
+      var arrows = panel.querySelectorAll('.flow-arrow');
+      arrows.forEach(function(a){ a.style.display = anyVisible ? '' : 'none'; });
+    });
+    // If searching, show all tab panels
+    panels.forEach(function(p){ p.classList.add('active'); });
+    tabBtns.forEach(function(b){ b.classList.remove('active'); });
+  });
+
+  function showAll(){
+    panels.forEach(function(panel){
+      var els = panel.querySelectorAll('.card, .diamond, .flow-arrow, .tier-col');
+      els.forEach(function(el){ el.style.display = ''; });
+    });
+    // Reset to show only active tab
+    var activeBtn = document.querySelector('.tab-btn.active');
+    if(!activeBtn){
+      tabBtns[0].classList.add('active');
+      activeBtn = tabBtns[0];
+    }
+    panels.forEach(function(p){ p.classList.remove('active'); });
+    var target = activeBtn.getAttribute('data-tab');
+    document.getElementById('tab-' + target).classList.add('active');
+  }
+})();
 </script>
 </body>
 </html>
